@@ -1,33 +1,27 @@
+# 19. Remove Nth Node From End of List
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
 
-class Solution:
+"""
+Runtime: 28 ms, faster than 83.72% of Python3 online submissions for Remove Nth Node From End of List.
+Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Remove Nth Node From End of List.
+"""
+class Solution: # most clever
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        first = head
-        second = ListNode(0)
-        second.next = head
-        counter = 0
-        flag = True
-        while True:
-            for i in range(n):
-                if first.next != None:
-                    first = first.next
-                    counter = i
-                else:
-                    flag = False
-                    break
-            if flag:
-                for i in range(n):
-                    second = second.next
-            else:
-                break
-                    
-        print(second.val)
-
-
+        fast = slow = head
+        for _ in range(n):
+            fast = fast.next
+        if not fast:
+            return head.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return head
 """
 Runtime: 32 ms, faster than 57.87% of Python3 online submissions for Remove Nth Node From End of List.
 Memory Usage: 12.8 MB, less than 100.00% of Python3 online submissions for Remove Nth Node From End of List.
